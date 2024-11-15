@@ -35,24 +35,35 @@ class FavoriteFoodManager:
     def remove_food(self, food):
         if food in self.food_list:
             self.food_list.remove(food)
+            with open('food_list.json', 'w') as file:
+                json.dump(self.food_list, file)
+            print(food, "removed successfully")
         else:
             print(f"{food} is not in the list")
 
 
 
-    
 
 managerObj = FavoriteFoodManager()
 
+menu = {
+    "1": "to see your favorite food",
+    "2": "to add a new food",
+    "3": "to remove a food",
+    "4": "to Terminate the program",
+}
+
+def print_menu():
+    for i, message in menu.items():
+        print(i, " : ", message)
+
+str = input("\nType M/m for Main Menu : ")
+if str != 'M' and str != 'm':
+    exit()
+
 while True:
-    str = input("\nType M/m for Main Menu : ")
-    if str != 'M' and str != 'm':
-        exit()
-    print("\nMain Menu : ")
-    print("1 to see your favorite food : ")
-    print("2 to add a new food : ")
-    print("3 to remove a food : ")
-    print("4 to Terminate the program : ")
+
+    print_menu()
 
     key = input()
     if key == '1':
